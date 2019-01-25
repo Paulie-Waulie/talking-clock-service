@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talking.Clock.Service", "Talking.Clock.Service\Talking.Clock.Service.csproj", "{2ABD9BC8-E9A6-4892-9527-6B9E3BBA6865}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C72205C5-08D2-46AE-99A1-D45B2420604D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talking.Clock.Service.Tests", "Talking.Clock.Service.Tests\Talking.Clock.Service.Tests.csproj", "{7CE2A747-D7C8-4E74-8640-7D2CA97E575D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2ABD9BC8-E9A6-4892-9527-6B9E3BBA6865}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ABD9BC8-E9A6-4892-9527-6B9E3BBA6865}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ABD9BC8-E9A6-4892-9527-6B9E3BBA6865}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ABD9BC8-E9A6-4892-9527-6B9E3BBA6865}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CE2A747-D7C8-4E74-8640-7D2CA97E575D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CE2A747-D7C8-4E74-8640-7D2CA97E575D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CE2A747-D7C8-4E74-8640-7D2CA97E575D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CE2A747-D7C8-4E74-8640-7D2CA97E575D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7CE2A747-D7C8-4E74-8640-7D2CA97E575D} = {C72205C5-08D2-46AE-99A1-D45B2420604D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {016FCDF8-3E3C-4114-B634-E57BE3864FDE}
+	EndGlobalSection
+EndGlobal
