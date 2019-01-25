@@ -21,5 +21,16 @@
             result.StatusCode.Should().Be(HttpStatusCode.OK);
             (await result.Content.ReadAsStringAsync()).Should().Be(expectedDayOfTheWeek);
         }
+
+        [Test]
+        public async Task When_Requesting_The_Day_Of_Today_Then_The_Correct_Day_Of_The_Week_Is_Returned()
+        {
+            var client = ClientBuilder.Build();
+            var result = await client.GetAsync($"api/dates/today/day");
+            var expectedDayOfTheWeek = DateTime.Now.DayOfWeek.ToString();
+
+            result.StatusCode.Should().Be(HttpStatusCode.OK);
+            (await result.Content.ReadAsStringAsync()).Should().Be(expectedDayOfTheWeek);
+        }
     }
 }

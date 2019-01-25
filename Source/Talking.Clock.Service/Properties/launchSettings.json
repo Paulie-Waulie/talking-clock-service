@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "Talking.Clock.Service": {
+        "commandName": "Project",
+        "launchBrowser": true,
+        "launchUrl": "api/dates/20-05-83/day",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+        },
+        "applicationUrl": "https://localhost:5001;http://localhost:5000"
+    }
+  }
+}
