@@ -3,6 +3,7 @@
     using Humanizer;
     using Microsoft.AspNetCore.Mvc;
     using System;
+    using Talking.Clock.Service.DateServices;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -11,7 +12,7 @@
         [Route("{dateString}/day")]
         public IActionResult GetDateDay([FromRoute] string dateString)
         {
-            if (DateTime.TryParse(dateString, out DateTime date))
+            if (DateParser.TryParseFromIso8601(dateString, out var date))
             {
                 return this.Ok(date.DayOfWeek.Humanize());
             }
