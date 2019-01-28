@@ -9,6 +9,13 @@
     [ApiController]
     public class DatesController : ControllerBase
     {
+        private readonly IDateTimeProvider dateTimeProvider;
+
+        public DatesController(IDateTimeProvider dateTimeProvider)
+        {
+            this.dateTimeProvider = dateTimeProvider;
+        }
+
         [Route("{dateString}/day")]
         public IActionResult GetDateDay([FromRoute] string dateString)
         {
@@ -23,7 +30,7 @@
         [Route("today/day")]
         public IActionResult GetTodayDay()
         {
-            return this.Ok(DateTime.Now.DayOfWeek.Humanize());
+            return this.Ok(this.dateTimeProvider.GetUtcNow().DayOfWeek.Humanize());
         }
     }
 }
