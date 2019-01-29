@@ -9,11 +9,22 @@
     [ApiController]
     public class DatesController : ControllerBase
     {
-        private readonly IDateTimeProvider dateTimeProvider;
+        private readonly IDateService dateService;
 
-        public DatesController(IDateTimeProvider dateTimeProvider)
+        public DatesController(IDateService dateService)
         {
-            this.dateTimeProvider = dateTimeProvider;
+            this.dateService = dateService;
+        }
+
+        [Route("{dateString}/date")]
+        public IActionResult GetDate([FromRoute] string dateString)
+        {
+            if (DateParser.TryParseFromIso8601(dateString, out var date))
+            {
+                return this.Ok(this.dateService.GetDate(date));
+            }
+
+            return this.NotFound();
         }
 
         [Route("{dateString}/day")]
@@ -21,7 +32,7 @@
         {
             if (DateParser.TryParseFromIso8601(dateString, out var date))
             {
-                return this.Ok(date.DayOfWeek.Humanize());
+                return this.Ok(this.dateService.GetDateDay(date));
             }
 
             return this.NotFound();
@@ -30,7 +41,13 @@
         [Route("today/day")]
         public IActionResult GetTodayDay()
         {
-            return this.Ok(this.dateTimeProvider.GetUtcNow().DayOfWeek.Humanize());
+            return this.Ok(this.dateService.GetTodayDay());
+        }
+
+        [Route("today/date")]
+        public IActionResult GetTodayDate()
+        {
+            return this.Ok(this.dateService.GetTodayDate());
         }
     }
 }
