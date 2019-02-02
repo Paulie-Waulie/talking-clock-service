@@ -1,8 +1,6 @@
 ﻿namespace Talking.Clock.Service.Controllers
 {
-    using Humanizer;
     using Microsoft.AspNetCore.Mvc;
-    using System;
     using Talking.Clock.Service.DateServices;
 
     [Route("api/[controller]")]
@@ -36,18 +34,6 @@
             }
 
             return this.NotFound();
-        }
-
-        [Route("today/day")]
-        public IActionResult GetTodayDay()
-        {
-            return this.Ok(this.dateService.GetTodayDay());
-        }
-
-        [Route("today/date")]
-        public IActionResult GetTodayDate()
-        {
-            return this.Ok(this.dateService.GetTodayDate());
         }
     }
 }
