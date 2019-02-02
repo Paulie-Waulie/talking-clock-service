@@ -2,39 +2,66 @@
 {
     using System;
     using System.Globalization;
-    using System.Net;
     using System.Threading.Tasks;
-    using FluentAssertions;
     using NUnit.Framework;
     using Talking.Clock.Service.Tests.Stubs;
+    using TestStack.BDDfy;
 
     [TestFixture]
-    public class TodayTests
+    public class TodayTests : ScenarioBase
     {
-        [TestCase("2019-05-20", "Monday")]
-        [TestCase("2223-01-01", "Wednesday")]
-        public async Task When_Requesting_The_Day_Of_Today_Then_The_Correct_Day_Of_The_Week_Is_Returned(string nowDateString, string expectedDayOfTheWeek)
-        {
-            var nowDate = DateTime.ParseExact(nowDateString, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            var dateTimeProvider = new DateTimeProviderStub(nowDate);
-            var client = new ClientBuilder().WithDateTimeProvider(dateTimeProvider).Build();
-            var result = await client.GetAsync("api/today/day");
+        private DateTimeProviderStub dateTimeProviderStub;
 
-            result.StatusCode.Should().Be(HttpStatusCode.OK);
-            (await result.Content.ReadAsStringAsync()).Should().Be($"Today is {expectedDayOfTheWeek}");
+        [Test]
+        public void GettingTodayDayOfTheWeek()
+        {
+            var dateToday = default(string);
+            var expectedDayOfTheWeek = default(string);
+
+            this.Given(_ => _.TodayIs(dateToday))
+                .When(_ => _.AskingForTheDayOfTheWeekForToday())
+                .Then(_ => _.TheResponseIsOk())
+                .And(_ => _.TheResponseMessageIs(expectedDayOfTheWeek))
+                .WithExamples(new ExampleTable("dateToday", "expectedDayOfTheWeek")
+                {
+                    { "2019-05-20", "Today is Monday" },
+                    { "2223-01-01", "Today is Wednesday" }
+                }).BDDfy();
         }
 
-        [TestCase("2019-01-25", "Friday, 25th January 2019")]
-        [TestCase("2000-05-20", "Saturday, 20th May 2000")]
-        public async Task When_Requesting_Today_Then_The_Date_Is_Returned_In_A_Human_Format(string nowDateString, string expectedDayOfTheWeek)
+        [Test]
+        public void GettingTodayDate()
         {
-            var nowDate = DateTime.ParseExact(nowDateString, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            var dateTimeProvider = new DateTimeProviderStub(nowDate);
-            var client = new ClientBuilder().WithDateTimeProvider(dateTimeProvider).Build();
-            var result = await client.GetAsync("api/today/date");
+            var dateToday = default(string);
+            var expectedDateDescription = default(string);
 
-            result.StatusCode.Should().Be(HttpStatusCode.OK);
-            (await result.Content.ReadAsStringAsync()).Should().Be(expectedDayOfTheWeek);
+            this.Given(_ => _.TodayIs(dateToday))
+                .When(_ => _.AskingForTheDateForToday())
+                .Then(_ => _.TheResponseIsOk())
+                .And(_ => _.TheResponseMessageIs(expectedDateDescription))
+                .WithExamples(new ExampleTable("dateToday", "expectedDateDescription")
+                {
+                    { "2019-01-25", "Friday, 25th January 2019" },
+                    { "2000-05-20", "Saturday, 20th May 2000" }
+                }).BDDfy();
+        }
+
+        private void TodayIs(string dateToday)
+        {
+            var nowDate = DateTime.ParseExact(dateToday, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            this.dateTimeProviderStub = new DateTimeProviderStub(nowDate);
+        }
+
+        private async Task AskingForTheDayOfTheWeekForToday()
+        {
+            this.WithUrl("api/today/day");
+            await this.MakeTheRequest(this.dateTimeProviderStub);
+        }
+
+        private async Task AskingForTheDateForToday()
+        {
+            this.WithUrl("api/today/date");
+            await this.MakeTheRequest(this.dateTimeProviderStub);
         }
     }
 }

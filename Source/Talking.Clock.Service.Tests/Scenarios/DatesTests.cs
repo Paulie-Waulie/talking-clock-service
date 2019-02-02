@@ -1,48 +1,75 @@
 ﻿namespace Talking.Clock.Service.Tests.Scenarios
 {
-    using System;
-    using System.Globalization;
-    using System.Net;
     using System.Threading.Tasks;
-    using FluentAssertions;
     using NUnit.Framework;
-    using Talking.Clock.Service.Tests.Stubs;
+    using TestStack.BDDfy;
 
     [TestFixture]
-    public class DatesTests
+    public class DatesTests : ScenarioBase
     {
-        [TestCase("2019-01-25", "Friday")]
-        [TestCase("2000-05-20", "Saturday")]
-        [TestCase("83-05-20", "Friday")]
-        [TestCase("2222-12-31", "Tuesday")]
-        [TestCase("2222-12-31T15:00:00Z", "Tuesday")]
-        [TestCase("2222-12-31T15%3A00%3A00Z", "Tuesday")]
-        public async Task When_Requesting_The_Day_Of_A_Date_Then_The_Correct_Day_Of_The_Week_Is_Returned(string dateString, string expectedDayOfTheWeek)
-        {
-            var client = new ClientBuilder().Build();
-            var result = await client.GetAsync($"api/dates/{dateString}/day");
+        private string dateToRequest;
 
-            result.StatusCode.Should().Be(HttpStatusCode.OK);
-            (await result.Content.ReadAsStringAsync()).Should().Be(expectedDayOfTheWeek);
+        [Test]
+        public void GettingTheDayOfTheWeekForADate()
+        {
+            var date = default(string);
+            var expectedDayOfTheWeek = default(string);
+
+            this.Given(_ => _.TheDateRequestedIs(date))
+                .When(_ => _.AskingForTheDayOfTheWeek())
+                .Then(_ => _.TheResponseIsOk())
+                .And(_ => _.TheResponseMessageIs(expectedDayOfTheWeek))
+                .WithExamples(new ExampleTable("date", "expectedDayOfTheWeek")
+                {
+                    { "2019-01-25", "Friday" },
+                    { "2000-05-20", "Saturday" },
+                    { "83-05-20", "Friday" },
+                    { "2222-12-31", "Tuesday" },
+                    { "2222-12-31T15:00:00Z", "Tuesday" },
+                    { "2222-12-31T15%3A00%3A00Z", "Tuesday" }
+                }).BDDfy();
         }
 
-        [TestCase("2019-01-25", "Friday, 25th January 2019")]
-        [TestCase("2000-05-20", "Saturday, 20th May 2000")]
-        [TestCase("83-05-20", "Friday, 20th May 1983")]
-        [TestCase("1900-02-01", "Thursday, 1st February 1900")]
-        [TestCase("1900-02-02", "Friday, 2nd February 1900")]
-        [TestCase("1900-02-03", "Saturday, 3rd February 1900")]
-        [TestCase("1900-02-04", "Sunday, 4th February 1900")]
-        [TestCase("2222-12-31", "Tuesday, 31st December 2222")]
-        [TestCase("2222-12-31T15:00:00Z", "Tuesday, 31st December 2222")]
-        [TestCase("2222-12-31T15%3A00%3A00Z", "Tuesday, 31st December 2222")]
-        public async Task When_Requesting_A_Date_Then_The_Date_Is_Returned_In_A_Human_Format(string dateString, string expectedDateDescription)
+        [Test]
+        public void GettingDateInReadableFormat()
         {
-            var client = new ClientBuilder().Build();
-            var result = await client.GetAsync($"api/dates/{dateString}/date");
+            var date = default(string);
+            var expectedDateDescription = default(string);
 
-            result.StatusCode.Should().Be(HttpStatusCode.OK);
-            (await result.Content.ReadAsStringAsync()).Should().Be(expectedDateDescription);
+            this.Given(_ => _.TheDateRequestedIs(date))
+                .When(_ => _.AskingForTheDate())
+                .Then(_ => _.TheResponseIsOk())
+                .And(_ => _.TheResponseMessageIs(expectedDateDescription))
+                .WithExamples(new ExampleTable("date", "expectedDateDescription")
+                {
+                    { "2019-01-25", "Friday, 25th January 2019" },
+                    { "2000-05-20", "Saturday, 20th May 2000" },
+                    { "83-05-20", "Friday, 20th May 1983" },
+                    { "1900-02-01", "Thursday, 1st February 1900" },
+                    { "1900-02-02", "Friday, 2nd February 1900" },
+                    { "1900-02-03", "Saturday, 3rd February 1900" },
+                    { "1900-02-04", "Sunday, 4th February 1900" },
+                    { "2222-12-31", "Tuesday, 31st December 2222" },
+                    { "2222-12-31T15:00:00Z", "Tuesday, 31st December 2222" },
+                    { "2222-12-31T15%3A00%3A00Z", "Tuesday, 31st December 2222" }
+                }).BDDfy();
+        }
+
+        private void TheDateRequestedIs(string dateString)
+        {
+            this.dateToRequest = dateString;
+        }
+
+        private async Task AskingForTheDayOfTheWeek()
+        {
+            this.WithUrl($"api/dates/{this.dateToRequest}/day");
+            await this.MakeTheRequest();
+        }
+
+        private async Task AskingForTheDate()
+        {
+            this.WithUrl($"api/dates/{this.dateToRequest}/date");
+            await this.MakeTheRequest();
         }
     }
 }
