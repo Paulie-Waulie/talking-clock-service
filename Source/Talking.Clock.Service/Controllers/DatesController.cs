@@ -22,7 +22,7 @@
                 return this.Ok(this.dateService.GetDate(date));
             }
 
-            return this.NotFound();
+            return this.NotFound(null);
         }
 
         [Route("{dateString}/day")]
@@ -33,7 +33,7 @@
                 return this.Ok(this.dateService.GetDateDay(date));
             }
 
-            return this.NotFound();
+            return this.NotFound(null);
         }
     }
 }

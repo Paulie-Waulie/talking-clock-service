@@ -38,9 +38,19 @@
             this.responseMessage.StatusCode.Should().Be(HttpStatusCode.OK); 
         }
 
+        protected void TheResponseIsNotFound()
+        {
+            this.responseMessage.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        }
+
         protected async Task TheResponseMessageIs(string expectedResponseMessage)
         {
             (await this.responseMessage.Content.ReadAsStringAsync()).Should().Be(expectedResponseMessage);
+        }
+
+        protected async Task TheResponseMessageIsEmpty()
+        {
+            (await this.responseMessage.Content.ReadAsStringAsync()).Should().BeEmpty();
         }
     }
 }

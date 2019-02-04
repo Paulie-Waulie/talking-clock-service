@@ -55,6 +55,32 @@
                 }).BDDfy();
         }
 
+        [Test]
+        public void InvalidDateFormatReturnsNotFound()
+        {
+            var date = default(string);
+
+            this.Given(_ => _.TheDateRequestedIs(date))
+                .When(_ => _.AskingForTheDate())
+                .Then(_ => _.TheResponseIsNotFound())
+                .And(_ => _.TheResponseMessageIsEmpty())
+                .WithExamples(new ExampleTable("date")
+                {
+                    { "20-05-2019" },
+                    { "20-05-99" },
+                    { "1983-35-20" },
+                    { "1983-12-32" },
+                    { "1983-124-30" },
+                    { "1983-12-222" },
+                    { "1983-22-01" },
+                    { "19830522" },
+                    { "1983/05/20" },
+                    { "1983.05.20" },
+                    { "1983-12-a" },
+                    { "aaa" }
+                }).BDDfy();
+        }
+
         private void TheDateRequestedIs(string dateString)
         {
             this.dateToRequest = dateString;
