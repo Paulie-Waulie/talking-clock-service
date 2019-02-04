@@ -49,13 +49,13 @@
             switch (time.Minute)
             {
                 case 0:
-                    return $"{time.Hour.ToWords().Transform(To.TitleCase)} O' Clock, {time.Meridiem}";
+                    return $"{time.HourAsWords} O' Clock, {time.Meridiem}";
                 case 1:
-                    return $"One Minute Past {time.Hour.ToWords().Transform(To.TitleCase)}, {time.Meridiem}";
+                    return $"One Minute Past {time.HourAsWords}, {time.Meridiem}";
                 case 30:
-                    return $"Half Past {time.Hour.ToWords().Transform(To.TitleCase)}, {time.Meridiem}";
+                    return $"Half Past {time.HourAsWords}, {time.Meridiem}";
                 default:
-                    return $"{time.Minute.ToWords().Transform(To.TitleCase)} Minutes Past {time.Hour.ToWords().Transform(To.TitleCase)}, {time.Meridiem}";
+                    return $"{time.MinuteAsWords} Minutes Past {time.HourAsWords}, {time.Meridiem}";
             }
         }
 
@@ -85,7 +85,11 @@
 
             public int Hour { get; }
 
+            public string HourAsWords => this.Hour.ToWords().Transform(To.TitleCase);
+
             public int Minute { get; }
+
+            public string MinuteAsWords => this.Minute.ToWords().Transform(To.TitleCase);
 
             public string Meridiem { get; }
         }
