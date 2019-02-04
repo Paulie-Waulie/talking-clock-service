@@ -10,11 +10,14 @@
 
         string GetDateDay(DateTime date);
 
-        string GetTodayDate();
-
-        string GetTodayDay();
-
         string GetNow();
+
+        string GetDateNow();
+
+        string GetDayNow();
+
+
+        string GetTimeNow();
     }
 
     internal class DateService : IDateService
@@ -31,17 +34,22 @@
             return $"{date.DayOfWeek.Humanize()}, {date.ToOrdinalWords()}";
         }
 
-        public string GetTodayDate()
+        public string GetNow()
+        {
+            return $"{this.GetTimeNow()} on {this.GetDateNow()}";
+        }
+
+        public string GetDateNow()
         {
             return this.GetDate(this.dateTimeProvider.GetNowInLocalTime());
         }
 
-        public string GetTodayDay()
+        public string GetDayNow()
         {
             return this.GetDateDay(this.dateTimeProvider.GetNowInLocalTime());
         }
 
-        public string GetNow()
+        public string GetTimeNow()
         {
             var now = this.dateTimeProvider.GetNowInLocalTime();
             var time = new TwelveHourClockTime(now);

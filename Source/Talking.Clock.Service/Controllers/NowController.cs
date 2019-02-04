@@ -15,9 +15,27 @@
         }
 
         [Route("")]
-        public IActionResult GetDateDay()
+        public IActionResult GetNow()
         {
             return this.Ok(this.dateService.GetNow());
+        }
+
+        [Route("time")]
+        public IActionResult GetDateDay()
+        {
+            return this.Ok(this.dateService.GetTimeNow());
+        }
+
+        [Route("day")]
+        public IActionResult GetDay()
+        {
+            return this.Ok($"Today is {this.dateService.GetDayNow()}");
+        }
+
+        [Route("date")]
+        public IActionResult GetTodayDate()
+        {
+            return this.Ok(this.dateService.GetDateNow());
         }
     }
 }
