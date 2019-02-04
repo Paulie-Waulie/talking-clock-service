@@ -33,29 +33,29 @@
 
         public string GetTodayDate()
         {
-            return this.GetDate(this.dateTimeProvider.GetUtcNow());
+            return this.GetDate(this.dateTimeProvider.GetNowInLocalTime());
         }
 
         public string GetTodayDay()
         {
-            return this.GetDateDay(this.dateTimeProvider.GetUtcNow());
+            return this.GetDateDay(this.dateTimeProvider.GetNowInLocalTime());
         }
 
         public string GetNow()
         {
-            var now = this.dateTimeProvider.GetUtcNow();
+            var now = this.dateTimeProvider.GetNowInLocalTime();
             var time = new TwelveHourClockTime(now);
 
             switch (time.Minute)
             {
                 case 0:
-                    return $"{time.Hour.ToWords().Transform(To.TitleCase)} O' Clock, {time.Meridiem} UTC";
+                    return $"{time.Hour.ToWords().Transform(To.TitleCase)} O' Clock, {time.Meridiem}";
                 case 1:
-                    return $"One Minute Past {time.Hour.ToWords().Transform(To.TitleCase)}, {time.Meridiem} UTC";
+                    return $"One Minute Past {time.Hour.ToWords().Transform(To.TitleCase)}, {time.Meridiem}";
                 case 30:
-                    return $"Half Past {time.Hour.ToWords().Transform(To.TitleCase)}, {time.Meridiem} UTC";
+                    return $"Half Past {time.Hour.ToWords().Transform(To.TitleCase)}, {time.Meridiem}";
                 default:
-                    return $"{time.Minute.ToWords().Transform(To.TitleCase)} Minutes Past {time.Hour.ToWords().Transform(To.TitleCase)}, {time.Meridiem} UTC";
+                    return $"{time.Minute.ToWords().Transform(To.TitleCase)} Minutes Past {time.Hour.ToWords().Transform(To.TitleCase)}, {time.Meridiem}";
             }
         }
 

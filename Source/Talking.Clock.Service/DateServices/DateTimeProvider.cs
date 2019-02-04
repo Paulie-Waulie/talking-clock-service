@@ -4,14 +4,14 @@
 
     public interface IDateTimeProvider
     {
-        DateTime GetUtcNow();
+        DateTime GetNowInLocalTime();
     }
 
     public class DateTimeProvider : IDateTimeProvider
     {
-        public DateTime GetUtcNow()
+        public DateTime GetNowInLocalTime()
         {
-            return DateTime.UtcNow;
+            return DateTime.Now.ToLocalTime();
         }
     }
 }

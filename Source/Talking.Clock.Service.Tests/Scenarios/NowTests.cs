@@ -23,12 +23,12 @@
                 .And(_ => _.TheResponseMessageIs(expectedDateDescription))
                 .WithExamples(new ExampleTable("now", "expectedDateDescription")
                 {
-                    { "2019-01-25T00:00:00Z", "Twelve O' Clock, AM UTC" },
-                    { "2019-01-25T12:00:00Z", "Twelve O' Clock, PM UTC" },
-                    { "2019-01-25T01:30:59Z", "Half Past One, AM UTC" },
-                    { "2019-01-25T03:01:12Z", "One Minute Past Three, AM UTC" },
-                    { "2019-01-25T15:31:00Z", "Thirty-One Minutes Past Three, PM UTC" },
-                    { "2019-01-25T23:59:59Z", "Fifty-Nine Minutes Past Eleven, PM UTC" }
+                    { "2019-01-25T00:00:00Z", "Twelve O' Clock, AM" },
+                    { "2019-01-25T12:00:00Z", "Twelve O' Clock, PM" },
+                    { "2019-01-25T01:30:59Z", "Half Past One, AM" },
+                    { "2019-01-25T03:01:12Z", "One Minute Past Three, AM" },
+                    { "2019-01-25T15:31:00Z", "Thirty-One Minutes Past Three, PM" },
+                    { "2019-01-25T23:59:59Z", "Fifty-Nine Minutes Past Eleven, PM" }
                 }).BDDfy();
         }
 

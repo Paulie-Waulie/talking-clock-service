@@ -12,7 +12,7 @@
             this.now = now;
         }
 
-        public DateTime GetUtcNow()
+        public DateTime GetNowInLocalTime()
         {
             return this.now;
         }
