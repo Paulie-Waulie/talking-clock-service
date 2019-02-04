@@ -4,7 +4,7 @@
     "Talking.Clock.Service": {
       "commandName": "Project",
       "launchBrowser": true,
-      //"launchUrl": "api/now",
+      "launchUrl": "api/now",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
