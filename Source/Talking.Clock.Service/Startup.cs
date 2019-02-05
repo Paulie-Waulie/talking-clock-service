@@ -20,6 +20,7 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Hard-code Culture for simplicity.
             CultureInfo.CurrentUICulture = CultureInfo.GetCultureInfo("en-GB");
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
