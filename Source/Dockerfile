@@ -19,3 +19,8 @@ RUN dotnet test --no-build -c Release
 FROM tests AS publish
 WORKDIR /app/Talking.Clock.Service
 RUN dotnet publish --no-build -c Release -o out
+
+FROM microsoft/dotnet:2.2-aspnetcore-runtime-nanoserver-1709 AS runtime
+WORKDIR /app
+COPY --from=publish /app/Talking.Clock.Service/out ./
+ENTRYPOINT ["dotnet", "Talking.Clock.Service.dll"]
