@@ -12,6 +12,10 @@ COPY . ./
 
 RUN dotnet build --no-restore -c Release
 
-FROM build AS publish
+FROM build AS tests
+WORKDIR /app/Talking.Clock.Service.Tests
+RUN dotnet test --no-build -c Release
+
+FROM tests AS publish
 WORKDIR /app/Talking.Clock.Service
 RUN dotnet publish --no-build -c Release -o out
