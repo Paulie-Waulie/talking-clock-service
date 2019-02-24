@@ -23,12 +23,12 @@
                 .And(_ => _.TheResponseMessageIs(expectedDateDescription))
                 .WithExamples(new ExampleTable("now", "expectedDateDescription")
                 {
-                    { "2019-01-25T00:00:00Z", "Twelve O' Clock, AM on Friday, 25th January 2019" },
-                    { "2019-01-25T12:00:00Z", "Twelve O' Clock, PM on Friday, 25th January 2019" },
-                    { "2000-05-20T00:30:59Z", "Half Past One, AM on Saturday, 20th May 2000" },
-                    { "2223-01-01T03:01:12Z", "One Minute Past Three, AM on Wednesday, 1st January 2223" },
-                    { "2019-01-25T15:31:00Z", "Thirty-One Minutes Past Three, PM on Friday, 25th January 2019" },
-                    { "2019-01-25T23:59:59Z", "Fifty-Nine Minutes Past Eleven, PM on Friday, 25th January 2019" }
+                    { "2019-01-25T00:00:00", "Twelve O' Clock, AM on Friday, 25th January 2019" },
+                    { "2019-01-25T12:00:00", "Twelve O' Clock, PM on Friday, 25th January 2019" },
+                    { "2000-05-20T01:30:59", "Half Past One, AM on Saturday, 20th May 2000" },
+                    { "2223-01-01T03:01:12", "One Minute Past Three, AM on Wednesday, 1st January 2223" },
+                    { "2019-01-25T15:31:00", "Thirty-One Minutes Past Three, PM on Friday, 25th January 2019" },
+                    { "2019-01-25T23:59:59", "Fifty-Nine Minutes Past Eleven, PM on Friday, 25th January 2019" }
                 }).BDDfy();
         }
 
@@ -44,12 +44,12 @@
                 .And(_ => _.TheResponseMessageIs(expectedDateDescription))
                 .WithExamples(new ExampleTable("now", "expectedDateDescription")
                 {
-                    { "2019-01-25T00:00:00Z", "Twelve O' Clock, AM" },
-                    { "2019-01-25T12:00:00Z", "Twelve O' Clock, PM" },
-                    { "2019-01-25T01:30:59Z", "Half Past One, AM" },
-                    { "2019-01-25T03:01:12Z", "One Minute Past Three, AM" },
-                    { "2019-01-25T15:31:00Z", "Thirty-One Minutes Past Three, PM" },
-                    { "2019-01-25T23:59:59Z", "Fifty-Nine Minutes Past Eleven, PM" }
+                    { "2019-01-25T00:00:00", "Twelve O' Clock, AM" },
+                    { "2019-01-25T12:00:00", "Twelve O' Clock, PM" },
+                    { "2019-01-25T01:30:59", "Half Past One, AM" },
+                    { "2019-01-25T03:01:12", "One Minute Past Three, AM" },
+                    { "2019-01-25T15:31:00", "Thirty-One Minutes Past Three, PM" },
+                    { "2019-01-25T23:59:59", "Fifty-Nine Minutes Past Eleven, PM" }
                 }).BDDfy();
         }
 
