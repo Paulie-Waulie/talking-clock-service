@@ -15,8 +15,7 @@
     <EntryPoint>
       <!-- Follow this link for more information about deploying Windows containers to Service Fabric: https://aka.ms/sfguestcontainers -->
       <ContainerHost>
-        <!--<ImageName> microsoft/dotnet-samples:aspnetapp:latest</ImageName>-->
-        <ImageName>paulie.azurecr.io/samples/talking-clock-service:latest</ImageName>
+        <ImageName>MYREGISTRY/talking-clock-service:latest</ImageName>
       </ContainerHost>
     </EntryPoint>
     <!-- Pass environment variables to your container: -->
