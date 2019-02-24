@@ -9,12 +9,12 @@
 
         public DateTimeProviderStub(DateTime now)
         {
-            this.now = now;
+            this.now = DateTime.SpecifyKind(now, DateTimeKind.Utc);
         }
 
         public DateTime GetNowInLocalTime()
         {
-            return this.now;
+            return this.now.ToUniversalTime();
         }
     }
 }
