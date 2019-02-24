@@ -15,14 +15,14 @@
     <EntryPoint>
       <!-- Follow this link for more information about deploying Windows containers to Service Fabric: https://aka.ms/sfguestcontainers -->
       <ContainerHost>
-        <ImageName>MYREGISTRY/talking-clock-service:latest</ImageName>
+          <ImageName>MYREGISTRY/talking-clock-service:latest</ImageName>
       </ContainerHost>
     </EntryPoint>
     <!-- Pass environment variables to your container: -->
     
-    <!--<EnvironmentVariables>
-      <EnvironmentVariable Name="ASPNETCORE_URLS" Value="http://localhost:5000"/>
-    </EnvironmentVariables>-->
+    <EnvironmentVariables>
+      <EnvironmentVariable Name="ASPNETCORE_URLS" Value="http://0.0.0.0:5000"/>
+    </EnvironmentVariables>
     
   </CodePackage>
 
